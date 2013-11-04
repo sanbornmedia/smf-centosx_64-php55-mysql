@@ -1,0 +1,120 @@
+---
+vagrantfile-local:
+    vm:
+        box: centos64-x64-vbox43-1383512148
+        box_url: 'https://puphpet.s3.amazonaws.com/centos64-x64-vbox43.box'
+        hostname: null
+        network:
+            private_network: 192.168.12.13
+            forwarded_port:
+                ez8mqadCDuhY:
+                    host: '8181'
+                    guest: '80'
+                3NvzXsJLLSNk:
+                    host: '3306'
+                    guest: '3306'
+                hAbhe2rWwXBd:
+                    host: '9000'
+                    guest: '9000'
+        provider:
+            virtualbox:
+                modifyvm:
+                    name: smf-centosx_64-php55-mysql
+                    natdnshostresolver1: on
+                    memory: '1024'
+                setextradata:
+                    VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root: 1
+        provision:
+            puppet:
+                manifests_path: puppet/manifests
+                options:
+                    - --verbose
+                    - '--hiera_config /vagrant/hiera.yaml'
+                    - '--parser future'
+        synced_folder:
+            bFrNweMjXNrg:
+                id: vagrant-root
+                source: ~/Documents/web
+                target: /var/www
+                nfs: 'false'
+        usable_port_range: 2200..2250
+    ssh:
+        host: null
+        port: null
+        private_key_path: null
+        username: vagrant
+        guest_port: null
+        keep_alive: true
+        forward_agent: false
+        forward_x11: false
+        shell: 'bash -l'
+    vagrant:
+        host: ':detect'
+server:
+    packages: {  }
+    dot_files:
+        -
+            bash_aliases: null
+    _prevent_empty: ''
+apache:
+    modules:
+        - php
+        - rewrite
+        - headers
+        - vhost_alias
+    vhosts:
+        C4CDurj02vFe:
+            servername: smf.dev
+            serveraliases:
+                - www.awesome.dev
+            docroot: /var/www/
+            port: '80'
+            setenv:
+                - 'APP_ENV dev'
+            override:
+                - All
+    user: www-data
+    group: www-data
+    default_vhost: true
+    mpm_module: prefork
+php:
+    version: '55'
+    composer: '1'
+    modules:
+        php:
+            - cli
+            - intl
+            - mcrypt
+            - odbc
+            - xmlrpc
+        pear: {  }
+        pecl:
+            - pecl_http
+            - APC
+            - memcache
+            - mongo
+            - PDO
+            - PDO_MYSQL
+            - yaml
+            - html_parse
+    ini:
+        display_errors: On
+        error_reporting: '-1'
+    timezone: America/New_York
+xdebug:
+    install: '1'
+    settings:
+        xdebug.default_enable: '1'
+        xdebug.remote_autostart: '0'
+        xdebug.remote_connect_back: '1'
+        xdebug.remote_enable: '1'
+        xdebug.remote_handler: dbgp
+        xdebug.remote_port: '9000'
+xhprof:
+    install: '1'
+    location: /var/www/xhprof
+mysql:
+    root_password: root
+    phpmyadmin: 0
+    databases: {  }
+
