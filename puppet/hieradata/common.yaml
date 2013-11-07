@@ -87,6 +87,7 @@ php:
             - mcrypt
             - odbc
             - xmlrpc
+            - mbstring
         pear: {  }
         pecl:
             - pecl_http
