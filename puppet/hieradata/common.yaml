@@ -67,6 +67,7 @@ apache:
             servername: smf.dev
             serveraliases:
                 - www.awesome.dev
+                - iamthefury.ngrok.com
             docroot: /var/www/
             port: '80'
             setenv:

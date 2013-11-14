@@ -179,6 +179,14 @@ if $::osfamily == 'debian' {
   }
 }
 
+## Open up XDebug
+if ! defined(Iptables::Allow['tcp/80']) {
+  iptables::allow { 'tcp/9000':
+    port     => '9000',
+    protocol => 'tcp'
+  }
+}
+
 create_resources(apache::vhost, $apache_values['vhosts'])
 
 define apache_mod {
