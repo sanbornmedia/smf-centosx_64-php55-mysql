@@ -53,8 +53,7 @@ vagrantfile-local:
 server:
     packages: {  }
     dot_files:
-        -
-            bash_aliases: null
+        - bash_aliases: null
     _prevent_empty: ''
 apache:
     modules:
