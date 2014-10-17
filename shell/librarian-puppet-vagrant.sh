@@ -66,6 +66,16 @@ if [ "$OS" == 'ubuntu' ]; then
 fi
 
 if [[ ! -f /.puphpet-stuff/librarian-puppet-installed ]]; then
+    echo "Updating Ruby...because Puppet"
+    sudo yum install gcc-c++ patch readline readline-devel zlib zlib-devel
+    sudo yum install libyaml-devel libffi-devel openssl-devel make
+    sudo yum install bzip2 autoconf automake libtool bison iconv-devel
+    sudo curl -L get.rvm.io | sudo bash -s stable
+    source ~/.profile
+    source /etc/profile.d/rvm.sh
+    rvm install 1.9.3
+    rvm use 1.9.3 --default
+
     echo 'Installing librarian-puppet'
     gem install librarian-puppet >/dev/null
     echo 'Finished installing librarian-puppet'
